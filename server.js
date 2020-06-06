@@ -34,7 +34,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //Connect to MongoDB
-mongoose.connect("mongodb://localhost/news", {useNewUrlParser: true});
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news"
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 //===============================================================================================================
 //Start the server
