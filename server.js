@@ -5,12 +5,12 @@ var expressHandlebars = require ('express-handlebars');
 //Database Model package
 var mongoose = require ('mongoose');
 
+//===============================================================================================================
 //Scarping Tools
-var axios = require ('axios');
-var cheerio = require ('cheerio');
-
+  
+//===============================================================================================================
 //Require all models
-var db = require ('./models');
+//var db = require ('./models');
 
 //Routes
 require ("./routes/api-routes");
