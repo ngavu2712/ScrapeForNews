@@ -13,8 +13,7 @@ var mongoose = require ('mongoose');
 //var db = require ('./models');
 
 //Routes
-require ("./routes/api-routes");
-require ("./routes/html-routes")
+
 //===============================================================================================================
 
 // process.env.PORT lets the port be set by Heroku
@@ -30,12 +29,15 @@ app.set("view engine", "handlebars");
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+require ("./routes/api-routes")(app);
+//require ("./routes/html-routes")(app);
 //Set public folder public
 app.use(express.static("public"));
 
 //Connect to MongoDB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news"
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+ 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/news");
 
 //===============================================================================================================
 //Start the server
