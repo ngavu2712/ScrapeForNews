@@ -5,6 +5,7 @@ var db = require("../models");
 //========================================================================================================================
 function apiRoute(app) {
 
+  //get results of scrape operation
   app.get("/scrape", function (req, res) {
     // First, tell the console what server.js is doing
     console.log(
@@ -40,7 +41,7 @@ function apiRoute(app) {
         })
       });
 
-      console.log(results)
+      //console.log(results)
       //db.Article.create(results).then(function(data){
           res.json(results)
       //})
@@ -49,5 +50,35 @@ function apiRoute(app) {
   });
 }
 
-// Export this file to the server
+//Get all saved articles
+app.get("/api/articles", function(){
+
+})
+
+//Save a scraped article
+app.post("/api/articles", function (){
+
+})
+
+//Get a saved article and its comments
+app.get("/api/articles/:id", function(){
+
+})
+
+//deletes article and its comments
+app.delete("/api/articles/:id"), function(){
+
+}
+
+//creates a new comment for an article
+app.post("/api/articles/:article_id/comments", function(){
+
+})
+
+//deletes comment associated with an article
+app.delete("/api/articles/:article_id/comments/:id", function(){
+  
+})
+
+
 module.exports = apiRoute;

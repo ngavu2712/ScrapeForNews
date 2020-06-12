@@ -19,15 +19,16 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/news", function(req, res){
-        db.find({}, function(err, data){
-            if(err) {
-                console.log(err)
-            } else {
-                res.render('news', {Article: data})
-            }
-        })
-    })
+    // app.get("/", function(req, res, next){
+    //     db.find({}, function(err, data){
+    //         if(err) {
+    //             console.log(err)
+    //         } else {
+    //             res.render('index', {Article: data})
+    //             console.log(data)
+    //         }
+    //     })
+    // })
 
 
 }

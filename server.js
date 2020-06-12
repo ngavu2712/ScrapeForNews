@@ -12,16 +12,16 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 3000;
 
-
-
-//Set up handlebar engine
-var expressHandlebars = require ('express-handlebars');
-app.engine("handlebars", expressHandlebars({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
-
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Set up handlebar engine
+var expressHandlebars = require ("express-handlebars");
+app.engine("handlebars", expressHandlebars({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
+
 
 // Import api-routes.js 
 require ("./routes/api-routes")(app);
