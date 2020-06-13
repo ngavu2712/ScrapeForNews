@@ -17,7 +17,7 @@ function apiRoute(app) {
     //===============================================================================================================
     //Scarping Tools
 
-    // Making a request via axios for Vietcetera's "webdev" board.
+    // A GET route for scraping Vietcetera via axios.
     axios.get("https://vietcetera.com/en").then(function (response) {
 
       // Load the Response into cheerio and save it to a variable
@@ -31,54 +31,95 @@ function apiRoute(app) {
         var summary = $(this).children("div").children("div.ant-row").children("div.ant-col-xs-15").children("div.horizontal-card-content").children("div.horizontal-card-description").text();
         var link = $(this).children("div").children("div.ant-row").children("div.horizontal-card-title-mobile").children("a").attr("href");
         //var img = $(this).children("div").children("div.ant-row").children("div.ant-col ant-col-xs-9 ant-col-md-8").children("div.horizontal-card-image").children("img").attr("src");
-        var img = $(this).children("div").children("div.ant-row").children("div.ant-col ant-col-xs-9 ant-col-md-8").children("div.horizontal-card-image").find("img").attr("data-src");
+        //var img = $(this).children("div").children("div.ant-row").children("div.ant-col ant-col-xs-9 ant-col-md-8").children("div.horizontal-card-image").find("img");
         // Push the results to the empty array
         results.push({
             Headline : headline,
             Summary : summary,
             URL : link,
-            Img : img
+            //Img : img
         })
+
+        console.log(results)
+        // Create a new Article using the `result` object built from scraping
+        db.Article.create(results)
+          .then(function(dbArticle){
+          console.log(dbArticle)
+          })
+          .catch(err => {
+            console.log(err);
+          })
       });
 
-      //console.log(results)
-      //db.Article.create(results).then(function(data){
-          res.json(results)
-      //})
-      //console.log(link);
-    });
+      // Send a message to the client
+      res.send("Scrape Complete");
+    })
   });
+
+//   //Get all saved articles
+// app.get("/api/articles", function(req, res){
+
+//   // Grab every document in the Articles collection
+//   db.Article.find({}).sort({dataScraped: -1}).then(dbArticles => {
+//      // If we were able to successfully find Articles, send them back to the client
+//     res.json(dbArticles);
+//   })
+//   .catch(err => {
+//     // If an error occurred, send it to the client
+//     res.json(err)
+//   });
+// });
+
+// //Save a scraped article
+// app.get("/api/articles", function (){
+//   db.findOne({_id: req.params.id})
+//   .populate('Comments')
+//   .then(article => {
+//     res.json(article)
+//   })
+//   .catch(err =>{
+//     res.json(err)
+//   })
+// })
+
+// //Get a saved article and its comments
+// app.post("/api/articles/:id", function(){
+
+//   const saved = req.body;
+
+//   db.create(saved).then(saved => {
+//     res.json(saved)
+//   })
+//   .catch(err =>{
+//     res.json(err)
+//   })
+// })
+
+// //deletes an article and its comments
+// app.delete("/api/articles/:id"), function(){
+//   db.findOne({_id: req.params.id}).then(article => {
+//     article.remove().then(deleted =>{
+//       res.json(deleted)
+//     })
+//   })
+//   .catch(err =>{
+//     res.json(err)
+//   })
+
+// }
+
+// //creates a new comment for an article
+// app.post("/api/articles/:article_id/comments", function(){
+
+// })
+
+// //deletes comment associated with an article
+// app.delete("/api/articles/:article_id/comments/:id", function(){
+
+// })
+
 }
 
-//Get all saved articles
-app.get("/api/articles", function(){
-
-})
-
-//Save a scraped article
-app.post("/api/articles", function (){
-
-})
-
-//Get a saved article and its comments
-app.get("/api/articles/:id", function(){
-
-})
-
-//deletes article and its comments
-app.delete("/api/articles/:id"), function(){
-
-}
-
-//creates a new comment for an article
-app.post("/api/articles/:article_id/comments", function(){
-
-})
-
-//deletes comment associated with an article
-app.delete("/api/articles/:article_id/comments/:id", function(){
-  
-})
 
 
 module.exports = apiRoute;
