@@ -1,5 +1,6 @@
 //Import the  routing packages
 var express = require ('express');
+var expressHandlebars = require ("express-handlebars");
 
 
 //Database Model package
@@ -17,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Set up handlebar engine
-var expressHandlebars = require ("express-handlebars");
+
 app.engine("handlebars", expressHandlebars({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 

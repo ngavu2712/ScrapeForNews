@@ -1,0 +1,84 @@
+<nav class="navbar navbar-dark bg-dark">
+  <!-- Navbar content -->
+ 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand" href="/" style="font-size: 35px;"> Vietcetera</a>
+  </button>
+  <button id="scrape" type="button" class="btn btn-info" style="font-size: 20px;">Scrape New Article</button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="savedarticle">Saved Articles</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+{{!-- ============================================================= --}}
+
+<h1>Saved Article</h1>
+
+{{!-- Display scrape articles here --}}
+
+{{#each callingArticles}}
+<div class="container"></div>
+  <div class="jumbotron1">
+    <button class="accordion">{{this}}</button>
+      <div class="panel">
+        <h6>{{this.Headline}}</h6>
+        <h6>{{this.Summary}}</h6>
+        <h6>{{this.URL}}</h6>
+      </div>
+    </div>
+</div>
+{{/each}}
+
+{{!-- Accordion CSS --}}
+ <style>
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+</style>
+
+{{!-- Accordion Javascript --}}
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>

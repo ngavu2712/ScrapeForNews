@@ -18,12 +18,14 @@ module.exports = function (app) {
     });
 
     // Route for getting all Articles from the db
-    app.get("/articles", (req,res)=>{
+    app.get("/savedarticle", (req,res)=>{
         // Grab every document in the Articles collection
         db.Article.find({})
-        .then( dbArticle =>{
+        .then( dbArticles =>{
+            console.log(dbArticles)
             // If we were able to successfully find Articles, send them back to the client
-            res.json(dbArticle)
+            res.render("savedarticle", {callingArticles: dbArticles} )
+            
         })
         .catch(function(err) {
             // If an error occurred, send it to the client
