@@ -4,6 +4,20 @@
   
 </div>
 
+{{#each Saved}}
+<div class="container">
+    <button id="save" type="button" class="btn btn-info">Save</button>
+  <div class="jumbotron1">
+    
+    <button class="accordion"><strong>{{this.Headline}}</strong></button>
+      <div class="panel">
+        <h6><strong>Summary:</strong> {{this.Summary}}</h6>
+        <h6><strong>URL:</strong> vietcetera.com/en{{this.URL}}</h6>
+      </div>
+    </div> 
+</div>
+ {{/each}}
+
 
 {{!-- Display saved articles here --}}
 

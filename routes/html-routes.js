@@ -21,7 +21,7 @@ module.exports = function (app) {
         db.Article.find({})
         .lean()
         .then( dbArticles =>{
-            console.log(dbArticles)
+            //console.log(dbArticles)
             // If we were able to successfully find Articles, send them back to the client
             res.render("news", {callingArticles: dbArticles} )
             
@@ -47,6 +47,21 @@ module.exports = function (app) {
             res.json(err);
           });
     })
+
+    //Route to save an article
+    app.get("/saved", (req,res) =>{
+        db.Article.find({saved: true})
+        .populate("Note")
+        .then(dbSavedArticles =>{
+            console.log(dbArticles)
+            res.render("saved", {Saved : dbSavedArticles })
+        })
+        .catch(function(err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+          });
+    })
+
 
     //Route to save an article
     app.get("/articles/save/:id", (req,res) => {
