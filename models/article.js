@@ -7,6 +7,7 @@ var articleSchema = new Schema ({
     Summary : {type: String, required : true},
     URL : {type: String, required:true},
     //Img : {type: String, required:true},
+    saved: {type: Boolean, default: false},
 
     // One to Many relationship. One article can have many notes
     Note : [{

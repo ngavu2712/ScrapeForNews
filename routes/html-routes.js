@@ -4,15 +4,13 @@ var db = require("../models");
 module.exports = function (app) {
 
     app.get ("/", function (req, res) {
-        db.Article.find({}).
-        then(dbArticle => {
+        db.Article.find({})
+        .lean()
+        .then(dbArticles => {
 
-            var articles = {
-                scraped : dbArticle
-            };
-            console.log(dbArticle)
+            console.log(dbArticles)
 
-            res.render('index', articles)
+            res.render('index', {callingArticles: dbArticles})
         })
        
     });
@@ -25,7 +23,7 @@ module.exports = function (app) {
         .then( dbArticles =>{
             console.log(dbArticles)
             // If we were able to successfully find Articles, send them back to the client
-            res.render("savedarticle", {callingArticles: dbArticles} )
+            res.render("news", {callingArticles: dbArticles} )
             
         })
         .catch(function(err) {
@@ -43,6 +41,19 @@ module.exports = function (app) {
         .then( dbArticle => {
             // If we were able to successfully find an Article with the given id, send it back to the client
             res.json(dbArticle);
+        })
+        .catch(function(err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+          });
+    })
+
+    //Route to save an article
+    app.get("/articles/save/:id", (req,res) => {
+        //Use the article id to find and update its saved boolean
+        db.Article.findOneAndUpdate({"_id": req.params.id}, {"saved": true})
+        .then(dbArticle =>{
+            res.json(dbArticle)
         })
         .catch(function(err) {
             // If an error occurred, send it to the client
@@ -69,6 +80,10 @@ module.exports = function (app) {
             });
     })
 
+
+    
+
+    
     // app.get("/scrape", function(req, res) {
     //     db.find({}, function(err, data){
     //         if (err) {

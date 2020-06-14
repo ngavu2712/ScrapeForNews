@@ -52,7 +52,7 @@ function apiRoute(app) {
       });
 
       // Send a message to the client
-      res.send("Scrape Complete");
+        res.send("Scrape Complete");
     })
   });
 
@@ -82,18 +82,18 @@ function apiRoute(app) {
 //   })
 // })
 
-// //Get a saved article and its comments
-// app.post("/api/articles/:id", function(){
+ //Get a saved article and its comments
+app.post("/api/savedarticle/:id", function(){
 
-//   const saved = req.body;
+const saved = req.body;
 
-//   db.create(saved).then(saved => {
-//     res.json(saved)
-//   })
-//   .catch(err =>{
-//     res.json(err)
-//   })
-// })
+  db.Article.create(saved).then(data => {
+    res.json(data)
+  })
+  .catch(err =>{
+    res.json(err)
+  })
+})
 
 // //deletes an article and its comments
 // app.delete("/api/articles/:id"), function(){
