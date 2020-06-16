@@ -18,7 +18,7 @@ module.exports = function (app) {
     // Route for getting all Articles from the db
     app.get("/articles", (req,res)=>{
         // Grab every document in the Articles collection
-        db.Article.find({})
+        db.Article.find({saved : false})
         
         .then( dbArticles =>{
 
