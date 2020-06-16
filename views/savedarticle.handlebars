@@ -6,17 +6,41 @@
 
 {{#each Saved}}
 <div class="container">
-    <button id="save" type="button" class="btn btn-info">Save</button>
-  <div class="jumbotron1">
-    
-    <button class="accordion"><strong>{{this.Headline}}</strong></button>
+    <button  type="button" class="delete btn btn-info">Delete</button>
+    <button  type="button"  data-id="{{_id}}" class="comment btn btn-info" data-toggle="modal" data-target="#savedModal">Comment</button>
+    <div class="jumbotron1">
+    <button class="accordion"><strong>{{Headline}}</strong></button>
       <div class="panel">
-        <h6><strong>Summary:</strong> {{this.Summary}}</h6>
-        <h6><strong>URL:</strong> vietcetera.com/en{{this.URL}}</h6>
+        <h6><strong>Summary:</strong> {{Summary}}</h6>
+        <h6><strong>URL:</strong> vietcetera.com/en{{URL}}</h6>
       </div>
     </div> 
 </div>
  {{/each}}
+
+
+<!-- Modal -->
+<div class="modal fade" id="savedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleId">Modal title</h5>
+        <br>
+       
+      </div>
+      <div class="modal-body">
+       <textarea id="addComment" class="form-control"></textarea>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="savedChanges btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {{!-- Display saved articles here --}}

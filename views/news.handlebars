@@ -9,43 +9,43 @@
 
 {{#each callingArticles}}
 <div class="container">
-    <button id="save" type="button" class="btn btn-info">Save</button>
-  <div class="jumbotron1">
-    
+    <button  data-id="{{this._id}}" type="button" class="save btn btn-info">Save</button>
     <button class="accordion"><strong>{{this.Headline}}</strong></button>
       <div class="panel">
         <h6><strong>Summary:</strong> {{this.Summary}}</h6>
         <h6><strong>URL:</strong> vietcetera.com/en{{this.URL}}</h6>
       </div>
-    </div> 
 </div>
  {{/each}}
 
 {{!-- Accordion CSS --}}
  <style>
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: rgba(54, 54, 54, 0.829);
+  color: rgb(255, 255, 255);
   cursor: pointer;
   padding: 18px;
-  width: 50%;
+  width: 100%;
   border: none;
   border-radius: 8px;
   text-align: left;
   outline: none;
   font-size: 20px;
   transition: 0.4s;
+  margin: auto 15px;
 }
 
 .active, .accordion:hover {
-  background-color: #ccc; 
+  background-color: rgb(233, 157, 157); 
 }
 
 .panel {
   padding: 0 18px;
   display: none;
-  background-color: white;
+  background-color:  rgba(255, 255, 255, 0.829);
   overflow: hidden;
+  width: 100%;
+  border-radius: 8px;
 }
 </style>
 

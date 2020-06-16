@@ -4,13 +4,13 @@ var db = require("../models");
 module.exports = function (app) {
 
     app.get ("/", function (req, res) {
-        db.Article.find({})
+        db.Article.find({saved : false})
         .lean()
         .then(dbArticles => {
 
             console.log(dbArticles)
 
-            res.render('index', {callingArticles: dbArticles})
+            res.render('news', {callingArticles: dbArticles})
         })
        
     });
@@ -50,11 +50,20 @@ module.exports = function (app) {
 
     //Route to save an article
     app.get("/saved", (req,res) =>{
+        console.log("save")
         db.Article.find({saved: true})
         .populate("Note")
         .then(dbSavedArticles =>{
-            console.log(dbArticles)
-            res.render("saved", {Saved : dbSavedArticles })
+            console.log(dbSavedArticles)
+            const newSavedArticle = dbSavedArticles.map(article => {
+                return {
+                    _id: article._id,
+                    Headline : article.Headline,
+                    Summary: article.Summary,
+                    URL: article.URL
+                }
+            })
+            res.render("savedarticle", {Saved : newSavedArticle})
         })
         .catch(function(err) {
             // If an error occurred, send it to the client

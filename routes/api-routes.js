@@ -83,11 +83,11 @@ function apiRoute(app) {
 // })
 
  //Get a saved article and its comments
-app.post("/api/savedarticle/:id", function(){
+app.put("/api/articles/:id", function(req,res){
 
-const saved = req.body;
+const id = req.params.id;
 
-  db.Article.create(saved).then(data => {
+  db.Article.update({_id: id}, {saved: true}).then(data => {
     res.json(data)
   })
   .catch(err =>{
