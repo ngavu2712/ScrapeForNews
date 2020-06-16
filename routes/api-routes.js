@@ -95,18 +95,18 @@ const id = req.params.id;
   })
 })
 
-// //deletes an article and its comments
-// app.delete("/api/articles/:id"), function(){
-//   db.findOne({_id: req.params.id}).then(article => {
-//     article.remove().then(deleted =>{
-//       res.json(deleted)
-//     })
-//   })
-//   .catch(err =>{
-//     res.json(err)
-//   })
+//deletes an article and its comments
+app.delete("/api/delete/:id", function(req,res){
 
-// }
+    db.Article.deleteOne({_id: req.params.id})
+    .then(article => {
+      res.json(article)
+     })
+   .catch(err =>{
+     res.json(err)
+   })
+
+ })
 
 // //creates a new comment for an article
 // app.post("/api/articles/:article_id/comments", function(){

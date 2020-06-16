@@ -4,10 +4,10 @@
   
 </div>
 
-{{#each Saved}}
+{{#each articles}}
 <div class="container">
-    <button  type="button" class="delete btn btn-info">Delete</button>
-    <button  type="button"  data-id="{{_id}}" class="comment btn btn-info" data-toggle="modal" data-target="#savedModal">Comment</button>
+    <button  type="button" data-id="{{_id}}"  class="delete btn btn-danger">Delete</button>
+    <button  type="button"  data-id="{{_id}}" class="comment btn btn-success" data-toggle="modal" data-target="#savedModal">Comment</button>
     <div class="jumbotron1">
     <button class="accordion"><strong>{{Headline}}</strong></button>
       <div class="panel">
@@ -49,28 +49,32 @@
 {{!-- Accordion CSS --}}
  <style>
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: rgba(54, 54, 54, 0.829);
+  color: rgb(255, 255, 255);
   cursor: pointer;
   padding: 18px;
-  width: 50%;
+  width: 100%;
   border: none;
   border-radius: 8px;
   text-align: left;
   outline: none;
   font-size: 20px;
   transition: 0.4s;
+  margin: auto 15px;
 }
 
 .active, .accordion:hover {
-  background-color: #ccc; 
+  background-color: chocolate; 
 }
 
 .panel {
-  padding: 0 18px;
+  padding: 18px;
   display: none;
-  background-color: white;
+  background-color:  rgba(255, 255, 255, 0.829);
   overflow: hidden;
+  width: 100%;
+  border-radius: 8px;
+  margin-left: 15px;
 }
 </style>
 

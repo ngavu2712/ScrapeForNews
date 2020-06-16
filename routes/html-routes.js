@@ -10,7 +10,7 @@ module.exports = function (app) {
 
             console.log(dbArticles)
 
-            res.render('news', {callingArticles: dbArticles})
+            res.render('index', {callingArticles: dbArticles})
         })
        
     });
@@ -19,11 +19,21 @@ module.exports = function (app) {
     app.get("/articles", (req,res)=>{
         // Grab every document in the Articles collection
         db.Article.find({})
-        .lean()
+        
         .then( dbArticles =>{
+
+            // Remove __v data created by Cheerio, so Handlebars can render the data
+            const callingdbArticles = dbArticles.map(article => {
+                return {
+                    _id: article._id,
+                    Headline : article.Headline,
+                    Summary: article.Summary,
+                    URL: article.URL
+                }
+            })
             //console.log(dbArticles)
             // If we were able to successfully find Articles, send them back to the client
-            res.render("news", {callingArticles: dbArticles} )
+            res.render("news", {articles: callingdbArticles} )
             
         })
         .catch(function(err) {
@@ -63,7 +73,7 @@ module.exports = function (app) {
                     URL: article.URL
                 }
             })
-            res.render("savedarticle", {Saved : newSavedArticle})
+            res.render("savedarticle", {articles : newSavedArticle})
         })
         .catch(function(err) {
             // If an error occurred, send it to the client
@@ -105,7 +115,18 @@ module.exports = function (app) {
     })
 
 
-    
+    //Route to delete an article
+    app.delete("/delete/:id", (req,res) =>{
+
+        db.Article.deleteOne({_id: req.params.id})
+
+    .then(deleteArticle =>{
+        res.rendet("savedarticle", {articles: deleteArticle})
+    })
+    .catch(function (err) {
+        res.json(err);
+    });
+})
 
     
     // app.get("/scrape", function(req, res) {
