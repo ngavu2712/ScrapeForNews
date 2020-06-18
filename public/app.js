@@ -58,7 +58,7 @@ $(".savedChanges").on("click", function(){
         Comments : $("#addComment").val() 
     }
     const titleId = $("#articleId").text()
-    $.ajax ({
+    $.ajax (
         url: "/api/comment",
         method: "POST",
         data: newComments
