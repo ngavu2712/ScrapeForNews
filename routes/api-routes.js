@@ -109,9 +109,9 @@ app.delete("/api/delete/:id", function(req,res){
  })
 
 // //creates a new comment for an article
-// app.post("/api/articles/:article_id/comments", function(){
+  // app.post("/api/comment/:id", function(){
 
-// })
+  // })
 
 // //deletes comment associated with an article
 // app.delete("/api/articles/:article_id/comments/:id", function(){

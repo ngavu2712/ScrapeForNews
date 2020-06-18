@@ -5,7 +5,7 @@ module.exports = function (app) {
 
     app.get ("/", function (req, res) {
         db.Article.find({saved : false})
-        .lean()
+        //.lean()
         .then(dbArticles => {
 
             console.log(dbArticles)
@@ -58,7 +58,7 @@ module.exports = function (app) {
           });
     })
 
-    //Route to save an article
+    //Route to get and render saved articles
     app.get("/saved", (req,res) =>{
         console.log("save")
         db.Article.find({saved: true})
@@ -121,7 +121,7 @@ module.exports = function (app) {
         db.Article.deleteOne({_id: req.params.id})
 
     .then(deleteArticle =>{
-        res.rendet("savedarticle", {articles: deleteArticle})
+        res.render("savedarticle", {articles: deleteArticle})
     })
     .catch(function (err) {
         res.json(err);
