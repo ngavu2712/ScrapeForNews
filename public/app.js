@@ -13,10 +13,15 @@ $(".comment").on("click", function(){
      $("#articleId").html(id)
    
     $.ajax({
-        url: "/articles/" + id,
+        url: "/savednote/" + id,
         method: "GET"
     })
     .then( commentDb =>{
+
+        var ul = $("<ul>");
+        var li = $("<li>").append(commentDb)
+        ul.append(li)
+        $("#savedModal").append(ul)
 
         console.log(commentDb)
 
@@ -34,7 +39,7 @@ $(".savedNote").on("click", () => {
     
      // Run a POST request to change the note, using what's entered in the inputs
      $.ajax ({
-        url: "/articles/" + thisId,
+        url: "/savednote/" + thisId,
         method: "POST",
         data : {
             body : $("#notes").val()
@@ -58,7 +63,7 @@ $(".savedChanges").on("click", function(){
         Comments : $("#addComment").val() 
     }
     const titleId = $("#articleId").text()
-    $.ajax (
+    $.ajax ({
         url: "/api/comment",
         method: "POST",
         data: newComments
